@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login with reCAPTCHA V2</title>
+        <!-- Google reCAPTCHA API script for validating human users -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+ <!-- Basic style for the form and body -->
+<style> 
+    body {
+        background-color: rgb(0, 0, 0);
+    }
+    form {
+        background-color: rgb(19, 70, 105); 
+        width: 25%; 
+        margin: 120px auto; 
+        padding: 50px; 
+        border-radius: 50px; 
+    }
+</style>
+<body>
+   <!-- Main login form -->
+    <form id="userLoginForm">
+        <h1>ULTIMATE SECRET SITE!11!!!1!</h1> 
+         <!-- Input field for username -->
+        <input id="userInput" type="text" name="username" placeholder="Username"><br><br>
+         <!-- Input field for password -->
+        <input id="passInput" type="password" name="password" placeholder="Password"><br><br> 
+          <!-- This nested form handles reCAPTCHA and submission -->
+        <form action="process.php" method="post">
+           <!-- Google reCAPTCHA widget -->
+          <div class="g-recaptcha" data-sitekey="6LfrqE0qAAAAAEaXgXYGg8tX4hDdoI-R2CHeCNHR"></div>
+            <!-- Submit button -->
+          <input type="submit" value="Submit">
+      </form>
+        
+    </form>
+
+    <script>
+       // Event listener for form submission
+        document.getElementById('userLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents default form submission behavior
+            
+     // Capture values of username and password from the input fields
+            var username = document.getElementById('userInput').value;
+            var password = document.getElementById('passInput').value;
+            
+            // Get the reCAPTCHA response
+            var captchaResponse = grecaptcha.getResponse();
+            
+            // Validate if reCAPTCHA is completed
+            if (!captchaResponse) {
+                alert('Please complete reCAPTCHA!');  // Alert if reCAPTCHA is not completed
+                return;
+            }
+            
+            if (username === "geropi" && password === "gero19") {
+                alert('Login successful');
+                window.location.href = "https://fitgirl-repacks.site/"; // Redirect to another URL on success AKA THE *ULTIMATE SECRET SITE!11!!!1!*
+            } else {
+                alert("Invalid username or password"); // Alert if login fails
+            }
+                // Logs the form data for debugging
+            console.log('Form submitted', { username, password, captchaResponse });
+        });
+    </script>
+</body>
+</html>
